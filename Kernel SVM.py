@@ -1,0 +1,40 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Apr  9 18:38:21 2019
+
+@author: Anubhav
+"""
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Importing the dataset
+frame = pd.read_csv('data.csv')
+frame = frame.iloc[:, :-1]
+
+# Separating the dependent and independent variables
+X = frame.iloc[:, 2:33].values
+Y = frame.iloc[:, 1]
+
+# Scaling the parameters
+from sklearn.preprocessing import StandardScaler
+scaler = StandardScaler()
+X = scaler.fit_transform(X)
+
+# Encoding the independent variable
+from sklearn.preprocessing import LabelEncoder
+encoder = LabelEncoder()
+Y = encoder.fit_transform(Y)
+
+# Splitting into training and testing set
+from sklearn.model_selection import train_test_split
+X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size = 0.3, random_state = 0)
+
+# Classsification based on Kernel SVM
+from sklearn.svm import SVC
+kernel_svm = SVC(kernel = 'rbf', random_state = 0)
+kernel_svm.fit(X_train, Y_train)
+
+Y_pred = kernel_svm.predict(X_test)
+print(kernel_svm.score(X_test, Y_test))

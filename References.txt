@@ -1,0 +1,7 @@
+Referrences:
+
+http://www.numpy.org/
+https://en.wikipedia.org/wiki/NumPy
+
+https://machinelearningmastery.com/a-gentle-introduction-to-scikit-learn-a-python-machine-learning-library/
+
